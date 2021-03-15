@@ -79,6 +79,7 @@ code {
 .dark{
   background-color: #323232;
   color: whitesmoke;
+  padding-bottom: 20px;
 }
 
 .darkHeader h1{
@@ -108,6 +109,7 @@ code {
 .white{
   background-color: #eeeeee;
   color: #323232;
+  padding-bottom: 20px;
 }
 .whiteHeader h1{
   margin-top: 0px;
@@ -129,6 +131,32 @@ code {
   border-style: none;
   outline: none;
   border-radius: 10px;
+}
+
+/* CHARACTER PAGE */
+.characterPage-container{
+  width: 80%;
+  height: 85vh;
+  display: flex;
+  margin: 0 auto;
+  border-radius: 20px;
+  background-color: black;
+  box-shadow: 0px -1px 15px -6px #000000;
+  color: white;
+}
+.characterPage-container .img-container{
+  width: 50%;
+}
+.characterPage-container .img-container img{
+  height: 100%;
+  border-radius: 20px 0 0 20px;
+}
+.characterPage-container .info-container{
+  width: 50%;
+}
+.characterPage-container .info-container p{
+  font-weight: bold;
+  font-size: 30px;
 }
 
 /* SCROLLBAR */

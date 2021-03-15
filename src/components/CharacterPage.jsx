@@ -1,13 +1,13 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "./Loading.jsx";
-import ThemeContext from "../context/ThemeContext"
+import ThemeContext from "../context/ThemeContext";
 
 const CharacterPage = () => {
   const params = useParams();
   const [character, setCharacter] = useState({});
-  const {theme,setTheme} = useContext(ThemeContext);
-  const classes = theme ? "dark" : "white"
+  const { theme, setTheme } = useContext(ThemeContext);
+  const classes = theme ? "dark" : "white";
   const [info, setInfo] = useState({
     loading: false,
     error: null,
@@ -28,16 +28,22 @@ const CharacterPage = () => {
     }
   }, []);
   return (
-    <div className={classes} >
+    <div className={classes}>
       {info.loading ? (
         <Loading />
       ) : (
-        <div>
-          <img src={character.image} alt={character.name} />
-          <p>{character.name}</p>
-          <p>{`Status: ${character.status === "Dead" ? "Dead💀" : "Alive💓"}`}</p>
-          <p>{character.species}</p>
-					<p>{character.gender}</p>
+        <div className="characterPage-container">
+          <div className="img-container" >
+            <img src={character.image} alt={character.name} />
+          </div>
+          <div className="info-container" >
+            <p>{character.name}</p>
+            <p>{`Status: ${
+              character.status === "Dead" ? "Dead💀" : "Alive💓"
+            }`}</p>
+            <p>{character.species}</p>
+            <p>{character.gender}</p>
+          </div>
         </div>
       )}
     </div>
