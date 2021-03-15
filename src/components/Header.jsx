@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <div className={HeaderClasses} >
       <Link to="/" className="link " >
-        <h1 >React Hooks</h1>
+        <h1 >Rick And Morty</h1>
       </Link>
       <button onClick={handleClick} type="button" className={ theme ? "bDark" : "bWhite"} >
         {darkMode ? "Light Mode" : "Dark Mode"}

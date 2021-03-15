@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useReducer } from "react";
+import React, { useEffect, useState, useContext, useReducer,useMemo } from "react";
 import Character from "./Character.jsx";
 import Loading from "./Loading.jsx";
 import ThemeContext from "../context/ThemeContext.js";
@@ -22,12 +22,14 @@ const favoriteReducer = (state, action) => {
 
 const Characters = () => {
   const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
+  const [search,setSearch] = useState('');
 
   const [info, setInfo] = useState({
     loading: false,
     error: null,
     next: "https://rickandmortyapi.com/api/character",
     characters: [],
+    charactersLoad: false
   });
   const { theme } = useContext(ThemeContext);
   const classes = theme ? "dark" : "white";
@@ -50,6 +52,7 @@ const Characters = () => {
           loading: false,
           next: data.info.next,
           characters: info.characters.concat(data.results),
+          charactersLoad:true
         })
       );
   };
@@ -57,6 +60,14 @@ const Characters = () => {
   const handleClick = (favorite) => {
     dispatch({ type: "ADD_TO_FAVORITE", payload: favorite });
   };
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value)
+  }
+
+  const filteredCharacters = info.charactersLoad ? info.characters.filter((character) => {
+    return character.name.toLowerCase().includes(search.toLowerCase());
+  }) : info.characters
 
   return (
     <div className={classes}>
@@ -73,15 +84,19 @@ const Characters = () => {
         </div>
       )}
 
+      <div className="search-container" >
+        <h3>Search</h3>
+        <input type="text" value={search} onChange={handleSearch} />
+      </div>
+
       <div className="Characters">
         {info.loading ? (
           <Loading />
         ) : (
-          info.characters.map((c) => {
+          filteredCharacters.map((c) => {
             return (
               <div>
-                <Character character={c} handleClick={handleClick} />
-                {/* <button type="button" onClick={() => handleClick(c)} >Add To Favorites</button> */}
+                <Character key={c.id} character={c} handleClick={handleClick} />
               </div>
             );
           })
